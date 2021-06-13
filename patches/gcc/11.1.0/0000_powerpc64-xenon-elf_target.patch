@@ -1,0 +1,78 @@
+diff -NurpP --minimal gcc-11.1.0/Makefile.in gcc-11.1.0-xenon/Makefile.in
+--- gcc-11.1.0/Makefile.in	2021-04-27 12:00:33.000000000 +0200
++++ gcc-11.1.0-xenon/Makefile.in	2021-06-13 07:44:44.336060971 +0200
+@@ -28422,7 +28422,6 @@ check-libiberty:
+ .PHONY: install-libiberty maybe-install-libiberty
+ maybe-install-libiberty:
+ @if libiberty
+-maybe-install-libiberty: install-libiberty
+ 
+ install-libiberty: installdirs
+ 	@: $(MAKE); $(unstage)
+diff -NurpP --minimal gcc-11.1.0/gcc/config.gcc gcc-11.1.0-xenon/gcc/config.gcc
+--- gcc-11.1.0/gcc/config.gcc	2021-04-27 12:00:13.000000000 +0200
++++ gcc-11.1.0-xenon/gcc/config.gcc	2021-06-13 08:32:00.000794531 +0200
+@@ -2891,6 +2891,15 @@ pdp11-*-*)
+ #	tmake_file="${tmake_file} rs6000/t-fprules"
+ #	extra_headers=
+ #	;;
++powerpc64-xenon-elf)
++	tm_file="${tm_file} dbxelf.h elfos.h gnu-user.h usegas.h freebsd-spec.h newlib-stdint.h rs6000/sysv4.h rs6000/default64.h"
++	tm_file="rs6000/biarch64.h ${tm_file}"
++	if test x${enable_secureplt} = xyes; then
++		tm_file="rs6000/secureplt.h ${tm_file}"
++	fi
++	extra_options="${extra_options} rs6000/sysv4.opt"
++	tmake_file="rs6000/t-fprules rs6000/t-ppcgas rs6000/t-ppccomm"
++	;;
+ powerpc-*-darwin*)
+ 	extra_options="${extra_options} ${cpu_type}/darwin.opt"
+ 	case ${target} in
+diff -NurpP --minimal gcc-11.1.0/gcc/configure gcc-11.1.0-xenon/gcc/configure
+--- gcc-11.1.0/gcc/configure	2021-04-27 12:00:33.000000000 +0200
++++ gcc-11.1.0-xenon/gcc/configure	2021-06-13 07:51:30.470972350 +0200
+@@ -30405,12 +30405,12 @@ $as_echo "#define HAVE_LD_PPC_GNU_ATTR_L
+ esac
+ 
+ case "$target:$tm_file" in
+-  powerpc64-*-freebsd* | powerpc64*-*-linux* | powerpc*-*-linux*rs6000/biarch64.h*)
++  powerpc64-*-freebsd* | powerpc64*-*-linux* | powerpc64-xenon-elf* | powerpc*-*-linux*rs6000/biarch64.h*)
+   case "$target" in
+      *le-*-linux*)
+      emul_name="-melf64lppc"
+       ;;
+-     *-*-linux*)
++     *-*-linux* | *-xenon-elf*)
+      emul_name="-melf64ppc"
+       ;;
+      *le-*-freebsd*)
+diff -NurpP --minimal gcc-11.1.0/gcc/configure.ac gcc-11.1.0-xenon/gcc/configure.ac
+--- gcc-11.1.0/gcc/configure.ac	2021-04-27 12:00:13.000000000 +0200
++++ gcc-11.1.0-xenon/gcc/configure.ac	2021-06-13 07:52:20.087811217 +0200
+@@ -6346,12 +6346,12 @@ EOF
+ esac
+ 
+ case "$target:$tm_file" in
+-  powerpc64-*-freebsd* | powerpc64*-*-linux* | powerpc*-*-linux*rs6000/biarch64.h*)
++  powerpc64-*-freebsd* | powerpc64*-*-linux* | powerpc64-xenon-elf* | powerpc*-*-linux*rs6000/biarch64.h*)
+   case "$target" in
+      *le-*-linux*)
+      emul_name="-melf64lppc"
+       ;;
+-     *-*-linux*)
++     *-*-linux* | *-xenon-elf*)
+      emul_name="-melf64ppc"
+       ;;
+      *le-*-freebsd*)
+diff -NurpP --minimal gcc-11.1.0/libgcc/config.host gcc-11.1.0-xenon/libgcc/config.host
+--- gcc-11.1.0/libgcc/config.host	2021-04-27 12:00:15.000000000 +0200
++++ gcc-11.1.0-xenon/libgcc/config.host	2021-06-13 07:52:57.440442174 +0200
+@@ -1192,6 +1192,8 @@ powerpc-*-rtems*)
+ 	tmake_file="${tmake_file} rs6000/t-ppccomm rs6000/t-savresfgpr rs6000/t-crtstuff t-crtstuff-pic t-fdpbit"
+ 	extra_parts="$extra_parts crtbeginS.o crtendS.o crtbeginT.o ecrti.o ecrtn.o ncrti.o ncrtn.o"
+ 	;;
++powerpc64-xenon-elf)
++	;;
+ powerpc*-*-linux*)
+ 	tmake_file="${tmake_file} rs6000/t-ppccomm rs6000/t-savresfgpr rs6000/t-crtstuff rs6000/t-linux t-dfprules rs6000/t-ppc64-fp t-slibgcc-libgcc"
+ 	tmake_file="${tmake_file} t-stack rs6000/t-stack-rs6000"

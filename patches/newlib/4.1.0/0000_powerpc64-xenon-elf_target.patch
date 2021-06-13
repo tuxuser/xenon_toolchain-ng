@@ -1,0 +1,24 @@
+diff -NurpP --minimal newlib-4.1.0/newlib/configure.host newlib-4.1.0-xenon/newlib/configure.host
+--- newlib-4.1.0/newlib/configure.host	2020-12-19 00:50:49.000000000 +0100
++++ newlib-4.1.0-xenon/newlib/configure.host	2021-06-13 07:59:30.479059653 +0200
+@@ -554,6 +554,9 @@ case "${host}" in
+ 	##newlib_cflags="${newlib_cflags} -idirafter ${gcc_dir}include"
+ 	;;
+ 
++  *-xenon-*)
++	have_crt0="no"
++	;;
+   m68hc11-*-*|m6811-*-*|m6812-*-*|m68hc12-*-*)
+ 	;;
+ 
+@@ -856,6 +859,10 @@ newlib_cflags="${newlib_cflags} -DCLOCK_
+   or1k*|or1knd*)
+ 	syscall_dir=syscalls
+ 	;;
++  powerpc64-xenon-elf)
++	default_newlib_io_long_long="yes"
++	newlib_cflags="${newlib_cflags} -DMISSING_SYSCALL_NAMES"
++	;;
+   powerpc*-*-eabialtivec*)
+ 	default_newlib_io_long_long="yes"
+ 	newlib_cflags="${newlib_cflags} -DMISSING_SYSCALL_NAMES"

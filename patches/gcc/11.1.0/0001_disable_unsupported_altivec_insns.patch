@@ -1,0 +1,177 @@
+diff -NurpP --minimal gcc-11.1.0/gcc/config/rs6000/altivec.md gcc-11.1.0-xenon/gcc/config/rs6000/altivec.md
+--- gcc-11.1.0/gcc/config/rs6000/altivec.md	2021-04-27 12:00:13.000000000 +0200
++++ gcc-11.1.0-xenon/gcc/config/rs6000/altivec.md	2021-06-13 14:32:47.008631816 +0200
+@@ -1106,7 +1106,7 @@
+ 		      (match_operand:VIshort 2 "register_operand" "v")
+                       (match_operand:V4SI 3 "register_operand" "v")]
+ 		     UNSPEC_VMSUMU))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmsumu<VI_char>m %0,%1,%2,%3"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1126,7 +1126,7 @@
+ 		      (match_operand:VIshort 2 "register_operand" "v")
+                       (match_operand:V4SI 3 "register_operand" "v")]
+ 		     UNSPEC_VMSUMM))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmsumm<VI_char>m %0,%1,%2,%3"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1136,7 +1136,7 @@
+ 		      (match_operand:V8HI 2 "register_operand" "v")
+                       (match_operand:V4SI 3 "register_operand" "v")]
+ 		     UNSPEC_VMSUMSHM))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmsumshm %0,%1,%2,%3"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1147,7 +1147,7 @@
+                       (match_operand:V4SI 3 "register_operand" "v")]
+ 		     UNSPEC_VMSUMUHS))
+    (set (reg:SI VSCR_REGNO) (unspec:SI [(const_int 0)] UNSPEC_SET_VSCR))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmsumuhs %0,%1,%2,%3"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1158,7 +1158,7 @@
+                       (match_operand:V4SI 3 "register_operand" "v")]
+ 		     UNSPEC_VMSUMSHS))
+    (set (reg:SI VSCR_REGNO) (unspec:SI [(const_int 0)] UNSPEC_SET_VSCR))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmsumshs %0,%1,%2,%3"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1219,7 +1219,7 @@
+                       (match_operand:V8HI 3 "register_operand" "v")]
+ 		     UNSPEC_VMHADDSHS))
+    (set (reg:SI VSCR_REGNO) (unspec:SI [(const_int 0)] UNSPEC_SET_VSCR))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmhaddshs %0,%1,%2,%3"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1230,7 +1230,7 @@
+                       (match_operand:V8HI 3 "register_operand" "v")]
+ 		     UNSPEC_VMHRADDSHS))
+    (set (reg:SI VSCR_REGNO) (unspec:SI [(const_int 0)] UNSPEC_SET_VSCR))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmhraddshs %0,%1,%2,%3"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1239,7 +1239,7 @@
+         (plus:V8HI (mult:V8HI (match_operand:V8HI 1 "register_operand" "v")
+ 		   	      (match_operand:V8HI 2 "register_operand" "v"))
+ 		   (match_operand:V8HI 3 "register_operand" "v")))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmladduhm %0,%1,%2,%3"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1789,7 +1789,7 @@
+         (unspec:V8HI [(match_operand:V16QI 1 "register_operand" "v")
+                       (match_operand:V16QI 2 "register_operand" "v")]
+ 		     UNSPEC_VMULEUB))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmuleub %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1798,7 +1798,7 @@
+         (unspec:V8HI [(match_operand:V16QI 1 "register_operand" "v")
+                       (match_operand:V16QI 2 "register_operand" "v")]
+ 		     UNSPEC_VMULOUB))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmuloub %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1807,7 +1807,7 @@
+         (unspec:V8HI [(match_operand:V16QI 1 "register_operand" "v")
+                       (match_operand:V16QI 2 "register_operand" "v")]
+ 		     UNSPEC_VMULESB))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmulesb %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1816,7 +1816,7 @@
+         (unspec:V8HI [(match_operand:V16QI 1 "register_operand" "v")
+                       (match_operand:V16QI 2 "register_operand" "v")]
+ 		     UNSPEC_VMULOSB))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmulosb %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1825,7 +1825,7 @@
+         (unspec:V4SI [(match_operand:V8HI 1 "register_operand" "v")
+                       (match_operand:V8HI 2 "register_operand" "v")]
+ 		     UNSPEC_VMULEUH))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmuleuh %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1834,7 +1834,7 @@
+         (unspec:V4SI [(match_operand:V8HI 1 "register_operand" "v")
+                       (match_operand:V8HI 2 "register_operand" "v")]
+ 		     UNSPEC_VMULOUH))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmulouh %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1843,7 +1843,7 @@
+         (unspec:V4SI [(match_operand:V8HI 1 "register_operand" "v")
+                       (match_operand:V8HI 2 "register_operand" "v")]
+ 		     UNSPEC_VMULESH))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmulesh %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -1852,7 +1852,7 @@
+         (unspec:V4SI [(match_operand:V8HI 1 "register_operand" "v")
+                       (match_operand:V8HI 2 "register_operand" "v")]
+ 		     UNSPEC_VMULOSH))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vmulosh %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -2088,7 +2088,7 @@
+                       (match_operand:V4SI 2 "register_operand" "v")]
+ 		     UNSPEC_VSUM4UBS))
+    (set (reg:SI VSCR_REGNO) (unspec:SI [(const_int 0)] UNSPEC_SET_VSCR))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vsum4ubs %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -2098,7 +2098,7 @@
+                       (match_operand:V4SI 2 "register_operand" "v")]
+ 		     UNSPEC_VSUM4S))
+    (set (reg:SI VSCR_REGNO) (unspec:SI [(const_int 0)] UNSPEC_SET_VSCR))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+   "vsum4s<VI_char>s %0,%1,%2"
+   [(set_attr "type" "veccomplex")])
+ 
+@@ -2139,9 +2139,9 @@
+   [(use (match_operand:V4SI 0 "register_operand"))
+    (use (match_operand:V4SI 1 "register_operand"))
+    (use (match_operand:V4SI 2 "register_operand"))]
+-  "TARGET_ALTIVEC"
++  "(TARGET_ALTIVEC && 0)"
+ {
+-  if (BYTES_BIG_ENDIAN)
++  if (BYTES_BIG_ENDIAN && 0)
+     emit_insn (gen_altivec_vsumsws_direct (operands[0], operands[1],
+                                            operands[2]));
+   else
