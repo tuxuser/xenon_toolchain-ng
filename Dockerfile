@@ -12,4 +12,4 @@ COPY patches patches
 RUN cp ct-ng_config .config
 
 # Build toolchain
-RUN ct-ng build || (echo ":: build.log ::"; cat build.log)
+RUN ct-ng build || (echo ":: build.log ::"; cat build.log; exit 1)
