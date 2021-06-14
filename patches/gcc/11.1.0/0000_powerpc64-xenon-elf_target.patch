@@ -18,12 +18,12 @@ diff -NurpP --minimal gcc-11.1.0/gcc/config.gcc gcc-11.1.0-xenon/gcc/config.gcc
  #	;;
 +powerpc64-xenon-elf)
 +	tm_file="${tm_file} dbxelf.h elfos.h gnu-user.h usegas.h freebsd-spec.h newlib-stdint.h rs6000/sysv4.h rs6000/default64.h"
-+	tm_file="rs6000/biarch64.h ${tm_file}"
++	tm_file="rs6000/biarch64.h ${tm_file} rs6000/xenon64.h"
 +	if test x${enable_secureplt} = xyes; then
 +		tm_file="rs6000/secureplt.h ${tm_file}"
 +	fi
 +	extra_options="${extra_options} rs6000/sysv4.opt"
-+	tmake_file="rs6000/t-fprules rs6000/t-ppcgas rs6000/t-ppccomm"
++	tmake_file="rs6000/t-fprules rs6000/t-fprules-fpbit rs6000/t-ppcgas rs6000/t-ppccomm"
 +	;;
  powerpc-*-darwin*)
  	extra_options="${extra_options} ${cpu_type}/darwin.opt"
