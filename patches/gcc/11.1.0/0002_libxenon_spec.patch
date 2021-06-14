@@ -15,8 +15,8 @@ diff -NurP --minimal gcc-11.1.0/gcc/config/rs6000/rs6000.c gcc-11.1.0-xenon/gcc/
  	  SET_CMODEL (CMODEL_SMALL);
 diff -NurP --minimal gcc-11.1.0/gcc/config/rs6000/xenon64.h gcc-11.1.0-xenon/gcc/config/rs6000/xenon64.h
 --- gcc-11.1.0/gcc/config/rs6000/xenon64.h	1970-01-01 01:00:00.000000000 +0100
-+++ gcc-11.1.0-xenon/gcc/config/rs6000/xenon64.h	2021-06-14 03:49:06.160968768 +0200
-@@ -0,0 +1,520 @@
++++ gcc-11.1.0-xenon/gcc/config/rs6000/xenon64.h	2021-06-14 03:56:57.769242608 +0200
+@@ -0,0 +1,513 @@
 +/* Definitions of target machine for GNU compiler,
 +   for 64 bit PowerPC linux.
 +   Copyright (C) 2000-2021 Free Software Foundation, Inc.
@@ -362,13 +362,6 @@ diff -NurP --minimal gcc-11.1.0/gcc/config/rs6000/xenon64.h gcc-11.1.0-xenon/gcc
 +#else
 +#define DEFAULT_ASM_ENDIAN " -mbig"
 +#endif
-+
-+/* Use gnu-user.h LINK_GCC_SEQUENCE_SPEC for linux.  */
-+#undef LINK_GCC_C_SEQUENCE_SPEC
-+#define	LINK_GCC_C_SEQUENCE_SPEC \
-+  "%{mads|myellowknife|mmvme|msim:%G %L %G;" \
-+  "!mcall-*|mcall-linux:" GNU_USER_TARGET_LINK_GCC_C_SEQUENCE_SPEC ";" \
-+  ":%G %L %G}"
 +
 +#undef  TOC_SECTION_ASM_OP
 +#define TOC_SECTION_ASM_OP \
